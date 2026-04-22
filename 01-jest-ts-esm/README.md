@@ -2,17 +2,15 @@
 
 ## 목표
 
-- Jest, TypeScript, ESM 조합을 안정적으로 실행 가능한 상태로 만듭니다.
+- 새 프로젝트를 시작할 최소 상태를 고정합니다.
+- 아직 Jest, TypeScript, Express는 넣지 않습니다.
 
 ## 교재 대응
 
-- 1장 `1-03 Jest + TypeScript + ESM 설정`
-- 1장 `1-04 첫 테스트 실행`
+- 1장 `1-02 실습 프로젝트 준비`
 
 ## 도달 상태
 
-- `package.json`, `tsconfig.json`, `jest.config.mjs`가 현재 폴더 안에서 바로 읽히는 상태입니다.
-- Jest, TypeScript, ESM을 함께 쓰는 최소 설정이 완성된 상태입니다.
-- `src/add.ts`, `src/add.spec.ts`로 첫 테스트를 실행할 수 있는 상태입니다.
-- `#src/*` alias가 함께 잡혀 있습니다.
-- `pnpm test:cov`로 coverage 리포트를 확인할 수 있는 기준점이 준비된 상태입니다.
+- `package.json`이 생성된 상태입니다.
+- `src/` 폴더가 준비된 상태입니다.
+- 1장에서 Jest 설정을 직접 붙일 수 있는 출발 상태입니다.
