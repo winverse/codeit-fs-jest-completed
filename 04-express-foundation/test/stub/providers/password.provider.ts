@@ -6,5 +6,7 @@ export class StubPasswordProvider
   extends PasswordProvider
   implements Stub<PasswordProvider>
 {
-  override compare = jest.fn<PasswordProvider['compare']>();
+  override compare = jest
+    .fn<PasswordProvider['compare']>()
+    .mockResolvedValue(false);
 }

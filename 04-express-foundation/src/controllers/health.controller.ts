@@ -12,10 +12,6 @@ export class HealthController extends BaseController {
   }
 
   private handleGetStatus(_req: Request, res: Response) {
-    return res.status(200).json({
-      status: 'ok',
-      message:
-        '첫 Express 핸들러와 미들웨어 단위 테스트를 준비한 상태입니다.',
-    });
+    return res.status(200).json({ status: 'ok' });
   }
 }
