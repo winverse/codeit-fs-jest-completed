@@ -1,13 +1,16 @@
-import { App } from './app.js';
-import { AuthController } from './controllers/auth.controller.js';
-import { HealthController } from './controllers/health.controller.js';
-import { RequireAuthMiddleware } from './middlewares/require-auth.middleware.js';
-import { PlainPasswordProvider } from './providers/password.provider.js';
-import { InMemoryUserRepository } from './repositories/in-memory-user.repository.js';
-import { AuthService } from './services/auth.service.js';
+import { App } from '#src/app.js';
+import {
+  AuthController,
+  Controller,
+  HealthController,
+} from '#src/controllers/index.js';
+import { RequireAuthMiddleware } from '#src/middlewares/index.js';
+import { PasswordProvider } from '#src/providers/index.js';
+import { UserRepository } from '#src/repositories/index.js';
+import { AuthService } from '#src/services/index.js';
 
 const port = Number(process.env.PORT ?? 4005);
-const userRepository = new InMemoryUserRepository([
+const userRepository = new UserRepository([
   {
     id: 1,
     email: 'teacher@example.com',
@@ -17,12 +20,13 @@ const userRepository = new InMemoryUserRepository([
 ]);
 const authService = new AuthService(
   userRepository,
-  new PlainPasswordProvider(),
+  new PasswordProvider(),
 );
-const application = new App(
+const requireAuthMiddleware = new RequireAuthMiddleware(userRepository);
+const controller = new Controller(
   new HealthController(),
-  new AuthController(authService),
-  new RequireAuthMiddleware(userRepository),
+  new AuthController(authService, requireAuthMiddleware),
 );
+const application = new App(controller);
 
 application.listen(port);

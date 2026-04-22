@@ -1,7 +1,10 @@
-import type { Request, Response } from 'express';
-import type { AuthService } from '../services/auth.service.js';
-import { BaseController } from './base.controller.js';
-import type { AuthenticatedRequest } from '../middlewares/require-auth.middleware.js';
+import type { Request, Response, Router } from 'express';
+import type { AuthService } from '#src/services/auth.service.js';
+import { BaseController } from '#src/controllers/base.controller.js';
+import type {
+  AuthenticatedRequest,
+  RequireAuthMiddleware,
+} from '#src/middlewares/require-auth.middleware.js';
 
 interface LoginBody {
   email?: string;
@@ -9,19 +12,55 @@ interface LoginBody {
 }
 
 export class AuthController extends BaseController {
-  constructor(private readonly authService: AuthService) {
+  constructor(
+    private readonly authService: AuthService,
+    private readonly requireAuthMiddleware?: RequireAuthMiddleware,
+  ) {
     super();
   }
 
-  login = async (req: Request<unknown, unknown, LoginBody>, res: Response) => {
+  public routes(): Router {
+    this.router.post('/auth/login', (req, res) => this.handleLogin(req, res));
+
+    const requireAuthMiddleware = this.requireAuthMiddleware;
+    if (requireAuthMiddleware) {
+      this.router.get(
+        '/auth/me',
+        requireAuthMiddleware.handle,
+        (req, res) => this.handleMe(req as AuthenticatedRequest, res),
+      );
+    }
+
+    return this.router;
+  }
+
+  public async login(
+    req: Request<unknown, unknown, LoginBody>,
+    res: Response,
+  ) {
+    return this.handleLogin(req, res);
+  }
+
+  public async me(req: AuthenticatedRequest, res: Response) {
+    return this.handleMe(req, res);
+  }
+
+  private async handleLogin(
+    req: Request<unknown, unknown, LoginBody>,
+    res: Response,
+  ) {
     const { email, password } = req.body;
     if (!email || !password) {
-      return this.fail(res, 400, 'email과 password를 모두 전달해야 합니다.');
+      return res
+        .status(400)
+        .json({ message: 'email과 password를 모두 전달해야 합니다.' });
     }
 
     const user = await this.authService.login(email, password);
     if (!user) {
-      return this.fail(res, 401, '로그인 정보가 올바르지 않습니다.');
+      return res
+        .status(401)
+        .json({ message: '로그인 정보가 올바르지 않습니다.' });
     }
 
     res.cookie('uid', String(user.id), {
@@ -29,18 +68,16 @@ export class AuthController extends BaseController {
       sameSite: 'lax',
     });
 
-    return this.ok(res, { user });
-  };
+    return res.status(200).json({ user });
+  }
 
-  me = async (req: AuthenticatedRequest, res: Response) => {
+  private async handleMe(req: AuthenticatedRequest, res: Response) {
     if (!req.user) {
-      return this.fail(
-        res,
-        500,
-        '인증 미들웨어가 사용자 정보를 준비하지 못했습니다.',
-      );
+      return res.status(500).json({
+        message: '인증 미들웨어가 사용자 정보를 준비하지 못했습니다.',
+      });
     }
 
-    return this.ok(res, { user: req.user });
-  };
+    return res.status(200).json({ user: req.user });
+  }
 }

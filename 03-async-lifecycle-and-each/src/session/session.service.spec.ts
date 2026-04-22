@@ -8,12 +8,32 @@ describe('SessionService', () => {
   });
 
   test.each([
-    [1_000, 10_000, 11_000],
-    [2_500, 5_000, 7_500],
-    [30_000, 0, 30_000],
+    {
+      currentDeadline: 1_000,
+      extraMs: 10_000,
+      expected: 11_000,
+    },
+    {
+      currentDeadline: 2_500,
+      extraMs: 5_000,
+      expected: 7_500,
+    },
+    {
+      currentDeadline: 30_000,
+      extraMs: 0,
+      expected: 30_000,
+    },
   ])(
-    'extendDeadline(%i, %i) = %i',
-    (currentDeadline: number, extraMs: number, expected: number) => {
+    '$currentDeadline에서 $extraMs를 더하면 $expected가 된다',
+    ({
+      currentDeadline,
+      extraMs,
+      expected,
+    }: {
+      currentDeadline: number;
+      extraMs: number;
+      expected: number;
+    }) => {
       expect(sessionService.extendDeadline(currentDeadline, extraMs)).toBe(
         expected,
       );

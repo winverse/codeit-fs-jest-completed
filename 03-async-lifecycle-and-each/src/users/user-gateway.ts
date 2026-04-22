@@ -1,4 +1,4 @@
-import type { UserGateway } from './user-lookup.service.js';
+import type { UserGateway } from '#src/users/user-lookup.service.js';
 
 export const userGateway: UserGateway = {
   async findNameById(_id: string): Promise<string | null> {

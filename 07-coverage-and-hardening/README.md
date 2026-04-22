@@ -1,0 +1,20 @@
+# 07-coverage-and-hardening
+
+## 목표
+
+- 테스트 데이터를 정리하고 실행을 안정화한 뒤, coverage를 보고 취약한 테스트를 보강한다.
+
+## 교재 대응
+
+- 현재 인정 버전 교재의 7장
+- 교재 본문 예시는 이 폴더를 기준으로 읽고, 장 끝 실습은 `codeit-fs-jest/codeit-fs-jest-practice/07-coverage-and-hardening-practice`에서 진행한다.
+
+## 도달 상태
+
+- 테스트 DB와 실제 DB를 분리하는 절차
+- `beforeAll` / `afterAll` 기반 연결과 정리 예제
+- 열린 핸들과 리소스 누수 원인 점검 절차
+- `watch`, `runInBand`로 실행 문제를 좁히는 절차
+- Express 테스트용 반복 실행 환경 기준선
+- coverage 확인 절차와 수치 해석 기준
+- 최종 점검 체크리스트 준비

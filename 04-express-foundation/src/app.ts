@@ -1,35 +1,29 @@
 import cookieParser from 'cookie-parser';
 import express, { type Express } from 'express';
-import type { AuthController } from './controllers/auth.controller.js';
-import type { HealthController } from './controllers/health.controller.js';
-import type { RequireAuthMiddleware } from './middlewares/require-auth.middleware.js';
+import type { Controller } from '#src/controllers/index.js';
+import { errorHandler } from '#src/middlewares/index.js';
 
 export class App {
   public readonly app: Express;
 
-  constructor(
-    private readonly healthController: HealthController,
-    private readonly authController: AuthController,
-    private readonly requireAuthMiddleware: RequireAuthMiddleware,
-  ) {
+  constructor(controller: Controller) {
     this.app = express();
-    this.configure();
-    this.registerRoutes();
+    this.middleware();
+    this.routes(controller);
+    this.errorHandling();
   }
 
-  private configure() {
+  private middleware() {
     this.app.use(express.json());
     this.app.use(cookieParser());
   }
 
-  private registerRoutes() {
-    this.app.get('/health', this.healthController.getStatus);
-    this.app.post('/auth/login', this.authController.login);
-    this.app.get(
-      '/auth/me',
-      this.requireAuthMiddleware.handle,
-      this.authController.me,
-    );
+  private routes(controller: Controller) {
+    this.app.use(controller.routes());
+  }
+
+  private errorHandling() {
+    this.app.use(errorHandler);
   }
 
   listen(port: number) {

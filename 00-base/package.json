@@ -12,5 +12,15 @@
     "lint": "eslint .",
     "format": "prettier . --write",
     "format:check": "prettier . --check"
+  },
+  "imports": {
+    "#src/*.js": {
+      "types": "./src/*.ts",
+      "default": "./dist/src/*.js"
+    },
+    "#test/*.js": {
+      "types": "./test/*.ts",
+      "default": "./dist/test/*.js"
+    }
   }
 }
