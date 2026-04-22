@@ -1,4 +1,4 @@
-import type { UserRecord } from '../../src/repositories/user.repository.js';
+import type { UserRecord } from '#src/repositories/user.repository.js';
 
 export const teacherUserRecord: UserRecord = {
   id: 1,

@@ -2,7 +2,7 @@ import request from 'supertest';
 import {
   createTestEnvironment,
   type TestEnvironment,
-} from '../stub/app-environment.js';
+} from '#test/stub/app-environment.js';
 
 describe('integration/app', () => {
   let environment: TestEnvironment;

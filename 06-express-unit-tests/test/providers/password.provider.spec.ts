@@ -1,4 +1,4 @@
-import { PlainPasswordProvider } from '../../src/providers/password.provider.js';
+import { PlainPasswordProvider } from '#src/providers/password.provider.js';
 
 describe('PlainPasswordProvider', () => {
   test.each([

@@ -3,7 +3,10 @@
   "private": true,
   "type": "module",
   "imports": {
-    "#src/*": "./src/*"
+    "#src/*.js": {
+      "types": "./src/*.ts",
+      "default": "./dist/src/*.js"
+    }
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
@@ -19,6 +22,7 @@
     "typescript-eslint": "^8.59.0"
   },
   "scripts": {
+    "build": "tsc -p ./tsconfig.json",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config ./jest.config.mjs --runInBand",
     "test:watch": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config ./jest.config.mjs --watch",
     "test:handles": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config ./jest.config.mjs --runInBand --detectOpenHandles",

@@ -1,11 +1,11 @@
-import { App } from '../../src/app.js';
-import { AuthController } from '../../src/controllers/auth.controller.js';
-import { HealthController } from '../../src/controllers/health.controller.js';
-import { RequireAuthMiddleware } from '../../src/middlewares/require-auth.middleware.js';
-import { PlainPasswordProvider } from '../../src/providers/password.provider.js';
-import { InMemoryUserRepository } from '../../src/repositories/in-memory-user.repository.js';
-import { AuthService } from '../../src/services/auth.service.js';
-import { teacherUserRecord } from '../mock/users.js';
+import { App } from '#src/app.js';
+import { AuthController } from '#src/controllers/auth.controller.js';
+import { HealthController } from '#src/controllers/health.controller.js';
+import { RequireAuthMiddleware } from '#src/middlewares/require-auth.middleware.js';
+import { PlainPasswordProvider } from '#src/providers/password.provider.js';
+import { InMemoryUserRepository } from '#src/repositories/in-memory-user.repository.js';
+import { AuthService } from '#src/services/auth.service.js';
+import { teacherUserRecord } from '#test/mock/users.js';
 
 export interface TestEnvironment {
   application: App;

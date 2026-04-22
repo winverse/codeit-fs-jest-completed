@@ -2,6 +2,16 @@
   "name": "@express-test/07-supertest-e2e",
   "private": true,
   "type": "module",
+  "imports": {
+    "#src/*.js": {
+      "types": "./src/*.ts",
+      "default": "./dist/src/*.js"
+    },
+    "#test/*.js": {
+      "types": "./test/*.ts",
+      "default": "./dist/test/*.js"
+    }
+  },
   "dependencies": {
     "cookie-parser": "^1.4.7",
     "express": "^5.1.0",
@@ -23,6 +33,7 @@
     "typescript-eslint": "^8.59.0"
   },
   "scripts": {
+    "build": "tsc -p ./tsconfig.json",
     "test": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config ./jest.config.mjs --runInBand",
     "test:cov": "cross-env NODE_OPTIONS=--experimental-vm-modules jest --config ./jest.config.mjs --coverage --runInBand",
     "typecheck": "tsc -p ./tsconfig.json --noEmit",

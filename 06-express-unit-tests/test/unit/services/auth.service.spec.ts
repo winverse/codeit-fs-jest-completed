@@ -1,13 +1,14 @@
 import { jest } from '@jest/globals';
-import { PlainPasswordProvider } from '../../../src/providers/password.provider.js';
-import { AuthService } from '../../../src/services/auth.service.js';
-import { teacherUserRecord } from '../../mock/users.js';
-import { StubPasswordProvider } from '../../stub/providers/password.provider.js';
-import { StubUserRepository } from '../../stub/repository/user.repository.js';
+import { PlainPasswordProvider } from '#src/providers/password.provider.js';
+import { AuthService } from '#src/services/auth.service.js';
+import { teacherUserRecord } from '#test/mock/users.js';
+import { StubPasswordProvider } from '#test/stub/providers/password.provider.js';
+import { StubUserRepository } from '#test/stub/repository/user.repository.js';
 
 describe('AuthService', () => {
   test('email과 password가 모두 맞으면 공개 사용자 정보를 돌려준다', async () => {
     const userRepository = new StubUserRepository();
+    userRepository.findByEmail.mockResolvedValue(teacherUserRecord);
     const passwordProvider = new StubPasswordProvider();
     const service = new AuthService(userRepository, passwordProvider);
 
@@ -26,6 +27,7 @@ describe('AuthService', () => {
 
   test('비밀번호가 틀리면 null을 돌려준다', async () => {
     const userRepository = new StubUserRepository();
+    userRepository.findByEmail.mockResolvedValue(teacherUserRecord);
     const passwordProvider = new StubPasswordProvider();
     const service = new AuthService(userRepository, passwordProvider);
 
@@ -38,7 +40,7 @@ describe('AuthService', () => {
 
   test('사용자를 찾지 못하면 password 비교를 건너뛴다', async () => {
     const userRepository = new StubUserRepository();
-    userRepository.findByEmailResult = null;
+    userRepository.findByEmail.mockResolvedValue(null);
     const passwordProvider = new StubPasswordProvider();
     const service = new AuthService(userRepository, passwordProvider);
 
@@ -50,6 +52,7 @@ describe('AuthService', () => {
 
   test('실제 객체를 유지한 채 spyOn으로 compare 호출을 검증할 수 있다', async () => {
     const userRepository = new StubUserRepository();
+    userRepository.findByEmail.mockResolvedValue(teacherUserRecord);
     const passwordProvider = new PlainPasswordProvider();
     const compareSpy = jest
       .spyOn(passwordProvider, 'compare')
@@ -66,6 +69,7 @@ describe('AuthService', () => {
 
   test('사용자 id가 있으면 공개 프로필을 돌려준다', async () => {
     const userRepository = new StubUserRepository();
+    userRepository.findById.mockResolvedValue(teacherUserRecord);
     const passwordProvider = new StubPasswordProvider();
     const service = new AuthService(userRepository, passwordProvider);
 
@@ -78,7 +82,7 @@ describe('AuthService', () => {
 
   test('사용자 id로 찾지 못하면 null을 돌려준다', async () => {
     const userRepository = new StubUserRepository();
-    userRepository.findByIdResult = null;
+    userRepository.findById.mockResolvedValue(null);
     const passwordProvider = new StubPasswordProvider();
     const service = new AuthService(userRepository, passwordProvider);
 

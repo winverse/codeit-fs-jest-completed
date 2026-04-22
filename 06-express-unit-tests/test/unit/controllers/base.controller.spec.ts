@@ -1,6 +1,6 @@
 import type { Response } from 'express';
 import httpMocks from 'node-mocks-http';
-import { BaseController } from '../../../src/controllers/base.controller.js';
+import { BaseController } from '#src/controllers/base.controller.js';
 
 class TestController extends BaseController {
   sendOk(res: Response) {

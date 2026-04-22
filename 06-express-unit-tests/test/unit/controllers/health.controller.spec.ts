@@ -1,5 +1,5 @@
 import httpMocks from 'node-mocks-http';
-import { HealthController } from '../../../src/controllers/health.controller.js';
+import { HealthController } from '#src/controllers/health.controller.js';
 
 describe('HealthController', () => {
   test('status ok를 응답한다', () => {
