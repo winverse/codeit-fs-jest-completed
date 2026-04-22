@@ -5,7 +5,7 @@ import {
 } from '#test/helper/app-environment.js';
 
 describe('integration/app', () => {
-  let environment: TestEnvironment;
+  let environment!: TestEnvironment;
 
   beforeEach(() => {
     environment = createTestEnvironment();

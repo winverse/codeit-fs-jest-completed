@@ -62,7 +62,7 @@ describe('AuthController', () => {
     });
   });
 
-  test('email이나 password가 없으면 400을 돌려준다', async () => {
+  test('email이나 password가 없으면 서비스 호출 없이 400을 돌려준다', async () => {
     const req = httpMocks.createRequest({
       body: {
         email: 'teacher@example.com',

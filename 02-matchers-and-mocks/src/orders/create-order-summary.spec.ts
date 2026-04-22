@@ -1,7 +1,18 @@
 import { createOrderSummary } from '#src/orders/create-order-summary.js';
 
 describe('createOrderSummary', () => {
-  test('원시값은 toBe와 not으로, 객체는 toStrictEqual로 비교한다', () => {
+  test('itemCount와 shippingFee 같은 원시값은 toBe로 비교한다', () => {
+    const summary = createOrderSummary([
+      { name: 'Node.js 책', price: 18_000, quantity: 2 },
+      { name: 'Jest 스티커', price: 6_000, quantity: 1 },
+      { name: 'TypeScript 카드', price: 0, quantity: 0 },
+    ]);
+
+    expect(summary.itemCount).toBe(3);
+    expect(summary.shippingFee).toBe(3_000);
+  });
+
+  test('결과 객체 전체는 toStrictEqual로 비교한다', () => {
     const summary = createOrderSummary([
       { name: 'Node.js 책', price: 18_000, quantity: 2 },
       { name: 'Jest 스티커', price: 6_000, quantity: 1 },

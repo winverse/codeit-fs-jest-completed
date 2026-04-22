@@ -7,7 +7,7 @@
 ## 교재 대응
 
 - 현재 인정 버전 교재의 7장
-- 교재 본문 예시는 이 폴더를 기준으로 읽고, 장 끝 실습은 `codeit-fs-jest/codeit-fs-jest-practice/07-coverage-and-hardening-practice`에서 진행한다.
+- 교재 본문 예시는 이 폴더를 기준으로 읽고, 별도 장 끝 실습 폴더 없이 이 장 코드 안에서 테스트 환경과 coverage 점검 흐름을 다시 확인한다.
 
 ## 도달 상태
 

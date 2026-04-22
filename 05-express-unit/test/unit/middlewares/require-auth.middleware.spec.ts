@@ -16,7 +16,7 @@ describe('RequireAuthMiddleware', () => {
     next = jest.fn();
   });
 
-  test('쿠키가 없으면 401을 돌려준다', async () => {
+  test('uid 쿠키가 없으면 사용자 조회 없이 401로 차단한다', async () => {
     const req = httpMocks.createRequest() as AuthenticatedRequest;
     const res = httpMocks.createResponse();
 
@@ -26,6 +26,7 @@ describe('RequireAuthMiddleware', () => {
     expect(res._getJSONData()).toEqual({
       message: '로그인이 필요합니다.',
     });
+    expect(userRepository.findById).not.toHaveBeenCalled();
     expect(next).not.toHaveBeenCalled();
   });
 
@@ -46,7 +47,7 @@ describe('RequireAuthMiddleware', () => {
     });
   });
 
-  test('uid 쿠키가 숫자가 아니면 401을 돌려준다', async () => {
+  test('uid 쿠키가 숫자가 아니면 사용자 조회 없이 401로 차단한다', async () => {
     const req = httpMocks.createRequest({
       cookies: { uid: 'not-a-number' },
     }) as AuthenticatedRequest;

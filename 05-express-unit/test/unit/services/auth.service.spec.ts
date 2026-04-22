@@ -40,7 +40,7 @@ describe('AuthService', () => {
     ).resolves.toBeNull();
   });
 
-  test('사용자를 찾지 못하면 password 비교를 건너뛴다', async () => {
+  test('사용자를 찾지 못하면 compare를 호출하지 않고 null을 돌려준다', async () => {
     userRepository.findByEmail.mockResolvedValue(null);
     await expect(
       service.login('missing@example.com', 'pw'),
