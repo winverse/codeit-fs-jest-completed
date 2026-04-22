@@ -4,7 +4,7 @@ import { mailer } from '#src/orders/mailer.js';
 import { sendOrderMail } from '#src/orders/send-order-mail.js';
 
 describe('sendOrderMail', () => {
-  test('테스트 대상 코드가 메일러를 어떤 인자로 호출했는지 검증한다', async () => {
+  test('호출 횟수와 호출 인자를 검증한다', async () => {
     const formatSpy = jest
       .spyOn(formatter, 'format')
       .mockReturnValueOnce('1,000원')
