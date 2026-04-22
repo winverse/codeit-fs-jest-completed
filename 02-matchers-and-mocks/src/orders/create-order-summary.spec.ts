@@ -31,7 +31,7 @@ describe('createOrderSummary', () => {
     });
   });
 
-  test('부분 일치와 배열 포함 관계를 검증한다', () => {
+  test('중요한 일부 속성만 부분 비교로 확인한다', () => {
     const freeShippingSummary = createOrderSummary([
       { name: 'Express 강의', price: 50_000, quantity: 1 },
     ]);

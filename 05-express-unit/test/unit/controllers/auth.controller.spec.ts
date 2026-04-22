@@ -7,10 +7,14 @@ import { StubAuthService } from '#test/stub/services/auth.service.js';
 describe('AuthController', () => {
   let authService: StubAuthService;
   let controller: AuthController;
+  let req = httpMocks.createRequest();
+  let res = httpMocks.createResponse();
 
   beforeEach(() => {
     authService = new StubAuthService();
     controller = new AuthController(authService);
+    req = httpMocks.createRequest();
+    res = httpMocks.createResponse();
   });
 
   test('로그인 성공 시 쿠키를 심고 공개 사용자 정보를 돌려준다', async () => {
@@ -19,13 +23,10 @@ describe('AuthController', () => {
       email: 'teacher@example.com',
       name: 'Teacher',
     });
-    const req = httpMocks.createRequest({
-      body: {
-        email: 'teacher@example.com',
-        password: 'pw',
-      },
-    });
-    const res = httpMocks.createResponse();
+    req.body = {
+      email: 'teacher@example.com',
+      password: 'pw',
+    };
     const cookieSpy = jest.spyOn(res, 'cookie');
 
     await controller.login(req, res);
@@ -46,13 +47,10 @@ describe('AuthController', () => {
   });
 
   test('로그인 실패 시 401을 돌려준다', async () => {
-    const req = httpMocks.createRequest({
-      body: {
-        email: 'teacher@example.com',
-        password: 'wrong',
-      },
-    });
-    const res = httpMocks.createResponse();
+    req.body = {
+      email: 'teacher@example.com',
+      password: 'wrong',
+    };
 
     await controller.login(req, res);
 
@@ -63,12 +61,9 @@ describe('AuthController', () => {
   });
 
   test('email이나 password가 없으면 서비스 호출 없이 400을 돌려준다', async () => {
-    const req = httpMocks.createRequest({
-      body: {
-        email: 'teacher@example.com',
-      },
-    });
-    const res = httpMocks.createResponse();
+    req.body = {
+      email: 'teacher@example.com',
+    };
 
     await controller.login(req, res);
 

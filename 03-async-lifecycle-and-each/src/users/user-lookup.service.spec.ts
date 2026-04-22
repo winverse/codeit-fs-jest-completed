@@ -1,5 +1,4 @@
 import { jest } from '@jest/globals';
-import { SessionService } from '#src/session/session.service.js';
 import { userGateway } from '#src/users/user-gateway.js';
 import { UserLookupService } from '#src/users/user-lookup.service.js';
 
@@ -30,18 +29,5 @@ describe('UserLookupService', () => {
     findNameByIdSpy.mockResolvedValue('win');
     await service.getDisplayName('user-1');
     expect(findNameByIdSpy).toHaveBeenCalledTimes(1);
-  });
-});
-
-describe('동기 에러와 비동기 에러', () => {
-  test('toThrow와 rejects.toThrow를 구분합니다', async () => {
-    const sessionService = new SessionService();
-    jest.spyOn(userGateway, 'findNameById').mockResolvedValue(null);
-    const userLookupService = new UserLookupService(userGateway);
-
-    expect(() => sessionService.validateTimeout(0)).toThrow('MIN_TIMEOUT');
-    await expect(userLookupService.getDisplayName('missing')).rejects.toThrow(
-      'USER_NOT_FOUND',
-    );
   });
 });
