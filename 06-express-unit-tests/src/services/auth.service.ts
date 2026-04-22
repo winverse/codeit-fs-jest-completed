@@ -1,5 +1,8 @@
-import type { PasswordProvider } from "../providers/password.provider.js";
-import type { UserRecord, UserRepository } from "../repositories/user.repository.js";
+import type { PasswordProvider } from '../providers/password.provider.js';
+import type {
+  UserRecord,
+  UserRepository,
+} from '../repositories/user.repository.js';
 
 export interface PublicUser {
   id: number;
@@ -19,7 +22,10 @@ export class AuthService {
       return null;
     }
 
-    const isValid = await this.passwordProvider.compare(password, user.passwordHash);
+    const isValid = await this.passwordProvider.compare(
+      password,
+      user.passwordHash,
+    );
     if (!isValid) {
       return null;
     }

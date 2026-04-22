@@ -4,6 +4,6 @@ export interface CurrencyFormatter {
 
 export const formatter: CurrencyFormatter = {
   format(value: number): string {
-    return `${value.toLocaleString("ko-KR")}원`;
+    return `${value.toLocaleString('ko-KR')}원`;
   },
 };

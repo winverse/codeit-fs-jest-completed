@@ -10,7 +10,7 @@
 
 ## 도달 상태
 
-- `src/jest-basics/` 안에 테스트 대상 코드와 `*.spec.ts` 테스트 파일을 함께 두는 구조가 정리된 상태입니다.
+- `src/` 안에 테스트 대상 코드와 `*.spec.ts` 테스트 파일을 함께 두는 구조가 정리된 상태입니다.
 - `toBe`, `not`, `toStrictEqual`, `toMatchObject`, `toContainEqual` 예제가 준비된 상태입니다.
 - `toHaveBeenCalledTimes`, `toHaveBeenCalledWith`, `toHaveBeenNthCalledWith` 예제가 준비된 상태입니다.
 - `jest.fn`, `jest.spyOn`, `mockImplementationOnce`, `mockReturnValueOnce`, `mockReturnValue` 예제가 실제 import 흐름으로 정리된 상태입니다.

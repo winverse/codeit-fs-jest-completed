@@ -1,4 +1,4 @@
-import type { Response } from "express";
+import type { Response } from 'express';
 
 export abstract class BaseController {
   protected ok<T>(res: Response, body: T, status = 200) {

@@ -1,7 +1,7 @@
-import type { Router as ExpressRouter } from "express";
-import type { AuthController } from "./auth.controller.js";
-import { BaseController } from "./base.controller.js";
-import type { HealthController } from "./health.controller.js";
+import type { Router as ExpressRouter } from 'express';
+import type { AuthController } from './auth.controller.js';
+import { BaseController } from './base.controller.js';
+import type { HealthController } from './health.controller.js';
 
 export class Controller extends BaseController {
   constructor(

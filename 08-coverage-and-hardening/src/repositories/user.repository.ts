@@ -8,5 +8,5 @@ export interface UserRecord {
 export interface UserRepository {
   findByEmail(email: string): Promise<UserRecord | null>;
   findById(id: number): Promise<UserRecord | null>;
-  create(user: Omit<UserRecord, "id">): Promise<UserRecord>;
+  create(user: Omit<UserRecord, 'id'>): Promise<UserRecord>;
 }

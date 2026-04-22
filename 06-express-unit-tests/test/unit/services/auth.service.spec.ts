@@ -13,9 +13,7 @@ describe('AuthService', () => {
 
     passwordProvider.compare.mockResolvedValue(true);
 
-    await expect(
-      service.login('teacher@example.com', 'pw'),
-    ).resolves.toEqual({
+    await expect(service.login('teacher@example.com', 'pw')).resolves.toEqual({
       id: 1,
       email: 'teacher@example.com',
       name: 'Teacher',
@@ -58,9 +56,7 @@ describe('AuthService', () => {
       .mockResolvedValue(true);
     const service = new AuthService(userRepository, passwordProvider);
 
-    await expect(
-      service.login('teacher@example.com', 'pw'),
-    ).resolves.toEqual({
+    await expect(service.login('teacher@example.com', 'pw')).resolves.toEqual({
       id: 1,
       email: 'teacher@example.com',
       name: 'Teacher',

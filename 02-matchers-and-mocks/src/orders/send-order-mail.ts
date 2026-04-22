@@ -1,5 +1,5 @@
-import type { CurrencyFormatter } from "./formatter.js";
-import type { Mailer } from "./mailer.js";
+import type { CurrencyFormatter } from './formatter.js';
+import type { Mailer } from './mailer.js';
 
 export interface OrderMailInput {
   email: string;

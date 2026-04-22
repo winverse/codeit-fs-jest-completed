@@ -1,8 +1,8 @@
-import cookieParser from "cookie-parser";
-import express, { type Express } from "express";
-import type { AuthController } from "./controllers/auth.controller.js";
-import type { HealthController } from "./controllers/health.controller.js";
-import type { RequireAuthMiddleware } from "./middlewares/require-auth.middleware.js";
+import cookieParser from 'cookie-parser';
+import express, { type Express } from 'express';
+import type { AuthController } from './controllers/auth.controller.js';
+import type { HealthController } from './controllers/health.controller.js';
+import type { RequireAuthMiddleware } from './middlewares/require-auth.middleware.js';
 
 export class App {
   public readonly app: Express;
@@ -23,8 +23,12 @@ export class App {
   }
 
   private registerRoutes() {
-    this.app.get("/health", this.healthController.getStatus);
-    this.app.post("/auth/login", this.authController.login);
-    this.app.get("/auth/me", this.requireAuthMiddleware.handle, this.authController.me);
+    this.app.get('/health', this.healthController.getStatus);
+    this.app.post('/auth/login', this.authController.login);
+    this.app.get(
+      '/auth/me',
+      this.requireAuthMiddleware.handle,
+      this.authController.me,
+    );
   }
 }

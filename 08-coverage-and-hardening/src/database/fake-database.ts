@@ -6,16 +6,16 @@ export interface DatabaseUserRecord {
 }
 
 export interface DatabaseConfig {
-  mode: "development" | "test";
+  mode: 'development' | 'test';
   databaseName: string;
 }
 
 export const createDatabaseConfig = (): DatabaseConfig => {
-  const isTest = process.env.NODE_ENV === "test";
+  const isTest = process.env.NODE_ENV === 'test';
 
   return {
-    mode: isTest ? "test" : "development",
-    databaseName: isTest ? "app_test" : "app_dev",
+    mode: isTest ? 'test' : 'development',
+    databaseName: isTest ? 'app_test' : 'app_dev',
   };
 };
 
@@ -50,7 +50,7 @@ export class FakeDatabase {
     this.sequence = 1;
   }
 
-  async seedUser(user: Omit<DatabaseUserRecord, "id">) {
+  async seedUser(user: Omit<DatabaseUserRecord, 'id'>) {
     this.ensureConnected();
 
     const record: DatabaseUserRecord = {
@@ -66,7 +66,9 @@ export class FakeDatabase {
   async findUserByEmail(email: string) {
     this.ensureConnected();
 
-    return [...this.users.values()].find((user) => user.email === email) ?? null;
+    return (
+      [...this.users.values()].find((user) => user.email === email) ?? null
+    );
   }
 
   async findUserById(id: number) {
@@ -80,7 +82,7 @@ export class FakeDatabase {
 
   private ensureConnected() {
     if (!this.connected) {
-      throw new Error("테스트 DB 연결이 아직 준비되지 않았습니다.");
+      throw new Error('테스트 DB 연결이 아직 준비되지 않았습니다.');
     }
   }
 

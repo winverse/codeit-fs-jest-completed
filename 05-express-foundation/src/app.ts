@@ -1,5 +1,5 @@
-import express, { type Express } from "express";
-import type { Controller } from "./controllers/controller.js";
+import express, { type Express } from 'express';
+import type { Controller } from './controllers/controller.js';
 
 export class App {
   public readonly app: Express;
@@ -15,7 +15,7 @@ export class App {
   }
 
   private routes() {
-    this.app.use("/api", this.controller.routes());
+    this.app.use('/api', this.controller.routes());
   }
 
   listen(port: number) {

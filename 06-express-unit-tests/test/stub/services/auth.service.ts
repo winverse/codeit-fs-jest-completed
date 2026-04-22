@@ -8,9 +8,7 @@ export class StubAuthService extends AuthService {
     super(new StubUserRepository(), new StubPasswordProvider());
   }
 
-  override login = jest
-    .fn<AuthService['login']>()
-    .mockResolvedValue(null);
+  override login = jest.fn<AuthService['login']>().mockResolvedValue(null);
 
   override getUserProfile = jest
     .fn<AuthService['getUserProfile']>()

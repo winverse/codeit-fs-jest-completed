@@ -1,4 +1,4 @@
-import { Router, type Router as ExpressRouter } from "express";
+import { Router, type Router as ExpressRouter } from 'express';
 
 export abstract class BaseController {
   public readonly router: ExpressRouter;

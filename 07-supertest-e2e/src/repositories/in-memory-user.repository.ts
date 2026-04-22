@@ -1,4 +1,4 @@
-import type { UserRecord, UserRepository } from "./user.repository.js";
+import type { UserRecord, UserRepository } from './user.repository.js';
 
 export class InMemoryUserRepository implements UserRepository {
   constructor(private readonly users: UserRecord[]) {}

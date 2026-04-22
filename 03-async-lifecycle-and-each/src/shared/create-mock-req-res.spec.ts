@@ -1,7 +1,7 @@
-import { createMockReqRes } from "#jest-basics/shared/create-mock-req-res.js";
+import { createMockReqRes } from '#src/shared/create-mock-req-res.js';
 
-describe("createMockReqRes", () => {
-  test("expect.any로 준비된 객체의 형태를 검증한다", () => {
+describe('createMockReqRes', () => {
+  test('expect.any로 준비된 객체의 형태를 검증한다', () => {
     const { req, res } = createMockReqRes();
 
     expect(req).toMatchObject({

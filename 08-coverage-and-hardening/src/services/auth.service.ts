@@ -1,5 +1,8 @@
-import type { PasswordProvider } from "../providers/password.provider.js";
-import type { UserRecord, UserRepository } from "../repositories/user.repository.js";
+import type { PasswordProvider } from '../providers/password.provider.js';
+import type {
+  UserRecord,
+  UserRepository,
+} from '../repositories/user.repository.js';
 
 export class AuthService {
   constructor(
@@ -13,7 +16,7 @@ export class AuthService {
     if (!user) {
       return {
         ok: false as const,
-        reason: "INVALID_CREDENTIALS" as const,
+        reason: 'INVALID_CREDENTIALS' as const,
       };
     }
 
@@ -22,7 +25,7 @@ export class AuthService {
     if (!verified) {
       return {
         ok: false as const,
-        reason: "INVALID_CREDENTIALS" as const,
+        reason: 'INVALID_CREDENTIALS' as const,
       };
     }
 

@@ -30,10 +30,7 @@ describe('AuthController', () => {
 
     await controller.login(req, res);
 
-    expect(authService.login).toHaveBeenCalledWith(
-      'teacher@example.com',
-      'pw',
-    );
+    expect(authService.login).toHaveBeenCalledWith('teacher@example.com', 'pw');
     expect(cookieSpy).toHaveBeenCalledWith('uid', '1', {
       httpOnly: true,
       sameSite: 'lax',
